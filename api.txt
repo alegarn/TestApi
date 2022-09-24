@@ -1,0 +1,32 @@
+$ rails g model Audio index show
+
+$ rails g controller Audios
+
+config/routes.rb
+
+  root 'audios#search'
+  get '/audios' => 'audios#search'
+
+
+app/views/audios/search.html.erb
+
+<h1>audios#search</h1>
+<p>Find me in app/views/audios/search.html.erb</p>
+
+<%= form_with(url: root_path, method: 'get', local: true) do %>
+<div class="form-group">
+<%= label_tag :track, 'Search for a song '%>
+<%= text_field_tag :track, nil, placeholder: 'Mein land', class: 'form-control' %>
+<%= label_tag :artist, 'Search for a song '%>
+<%= text_field_tag :artist, nil, placeholder: 'Rammstein', class: 'form-control' %>
+<%= label_tag :album, 'Search for a song '%>
+<%= text_field_tag :album, nil, placeholder: '?', class: 'form-control' %>
+
+</div>
+<%= button_tag 'Search', class: 'btn btn-success btn-block' %>
+<% end %>
+
+<!-- <%= #(JSON.parse(response)).first[1].first["preview"]%> -->
+
+<%= response = HTTP.get('https://api.deezer.com/search/track?q=track:"mein%land"')%>
+

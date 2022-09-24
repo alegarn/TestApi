@@ -1,0 +1,6 @@
+<h1>Requests#index</h1>
+<p>Find me in app/views/requests/index.html.erb</p>
+
+<% api = HTTP.get("https://api.deezer.com/track/3135556").to_s %>
+<%= my_hash = JSON.parse(api)%>
+<audio src= <%= "#{my_hash["preview"]}" %> controls> </audio>
